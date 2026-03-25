@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title>Aaditya Bharat Singh — EE Student, Developer & Roboticist</title>
+
+<!-- SEO -->
+<meta name="description" content="Aaditya Bharat Singh — Electrical Engineering student at UW-Madison. Building robots, apps, and interfaces. FSAE, ARTPARK @ IISc, Jala Poshan app developer.">
+<meta name="keywords" content="Aaditya Bharat Singh, EE student, UW Madison, electrical engineering, robotics, developer, Flutter, Arduino, FSAE, ARTPARK, portfolio">
+<meta name="author" content="Aaditya Bharat Singh">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aadityabharatsingh.com">
+
+<!-- Open Graph (LinkedIn, WhatsApp, Slack previews) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aadityabharatsingh.com">
+<meta property="og:title" content="Aaditya Bharat Singh — EE Student, Developer & Roboticist">
+<meta property="og:description" content="Building robots, apps, and interfaces that do something awesome. EE @ UW-Madison, FSAE, ARTPARK @ IISc.">
+<meta property="og:image" content="https://aadityabharatsingh.com/og-image.png">
+
+<!-- Twitter card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aaditya Bharat Singh — Portfolio">
+<meta name="twitter:description" content="EE student at UW-Madison. Robots, apps, interfaces.">
+<meta name="twitter:image" content="https://aadityabharatsingh.com/og-image.png">
+
+<!-- Structured data (Google rich results) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Aaditya Bharat Singh",
+  "url": "https://aadityabharatsingh.com",
+  "email": "aadityabharatsingh81@gmail.com",
+  "jobTitle": "Electrical Engineering Student",
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "University of Wisconsin-Madison"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/aadityabharatsingh/",
+    "https://www.instagram.com/aadityabsingh"
+  ],
+  "description": "EE student at UW-Madison building robots, apps, and interfaces. FSAE electrical engineer, embedded systems developer, published researcher."
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  (function(){ emailjs.init({ publicKey: 'ooHLxJh0_YsDmA0sE' }); })();
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0a0a0a;
+  --surface:#111;
+  --surface2:#1a1a1a;
+  --surface3:#222;
+  --border:rgba(255,255,255,0.06);
+  --border2:rgba(255,255,255,0.12);
+  --accent:#2dd4bf;       /* teal */
+  --accent2:#0d9488;      /* teal dark */
+  --accent-dim:rgba(45,212,191,0.08);
+  --accent-dim2:rgba(45,212,191,0.15);
+  --text:#f4f4f5;
+  --muted:#71717a;
+  --muted2:#3f3f46;
+  --mono:'Space Mono',monospace;
+  --sans:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;cursor:none;}
+
+/* ── SPLASH ── */
+#splash{
+  position:fixed;inset:0;z-index:10000;
+  background:#000;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+  transition:opacity .7s ease,visibility .7s ease;
+}
+#splash.hide{opacity:0;visibility:hidden;pointer-events:none;}
+#ascii-art{
+  font-family:var(--mono);
+  font-size:clamp(8px,1.6vw,16px);
+  line-height:1.2;
+  color:rgba(45,212,191,0.8);
+  white-space:pre;
+  text-shadow:0 0 10px rgba(45,212,191,0.3);
+  user-select:none;
+}
+#splash-name{
+  font-family:var(--mono);font-size:12px;letter-spacing:6px;
+  color:var(--muted);opacity:0;transition:opacity .6s ease;
+}
+#splash-name.show{opacity:1;}
+#splash-skip{
+  position:absolute;bottom:24px;
+  font-family:var(--mono);font-size:10px;color:var(--muted2);
+  letter-spacing:3px;background:none;border:none;cursor:none;
+  opacity:0;animation:fadeIn 1s ease forwards 3s;
+}
+@keyframes fadeIn{to{opacity:1;}}
+
+/* ── CURSOR ── */
+#cursor{
+  position:fixed;width:12px;height:12px;
+  border:1.5px solid var(--accent);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:width .18s,height .18s,background .18s,border-color .18s;
+}
+#cursor.hovering{width:36px;height:36px;background:rgba(45,212,191,0.08);}
+#cursor.clicking{width:8px;height:8px;background:var(--accent);}
+#cursor-trail{
+  position:fixed;width:4px;height:4px;
+  background:var(--accent);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  opacity:0.4;
+  transition:transform .08s linear;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 52px;
+  background:rgba(10,10,10,0.9);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  transition:padding .3s,background .3s;
+}
+nav.scrolled{padding:12px 52px;background:rgba(10,10,10,0.97);}
+.nav-left{display:flex;align-items:center;gap:36px;}
+.nav-logo{font-family:var(--mono);font-size:15px;color:var(--text);letter-spacing:3px;font-weight:700;}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:24px;list-style:none;}
+.nav-links a{
+  font-family:var(--mono);font-size:10px;color:var(--muted);
+  text-decoration:none;letter-spacing:1.5px;transition:color .2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;
+  height:1px;background:var(--accent);transform:scaleX(0);transition:transform .2s;
+}
+.nav-links a:hover,.nav-links a.active{color:var(--text);}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-socials{display:flex;gap:8px;}
+.nav-soc{
+  font-family:var(--mono);font-size:9px;color:var(--muted);
+  text-decoration:none;letter-spacing:1px;padding:4px 9px;
+  border:1px solid var(--border);border-radius:3px;
+  transition:color .2s,border-color .2s;cursor:none;
+}
+.nav-soc:hover{color:var(--accent);border-color:rgba(45,212,191,0.4);}
+
+/* ── LAYOUT ── */
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:0 52px;}
+section{position:relative;z-index:1;padding:80px 0;}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;position:relative;z-index:1;}
+.hero-grid{display:grid;grid-template-columns:1fr 520px;gap:52px;align-items:center;padding:100px 4% 60px 8%;width:100%;}
+.hero-inner{}
+.hero-tag{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:3px;margin-bottom:20px;opacity:0;animation:fadeUp .7s ease forwards .2s;}
+.hero-name{font-family:var(--mono);font-size:clamp(36px,5vw,72px);font-weight:700;line-height:1.0;letter-spacing:-2px;margin-bottom:20px;opacity:0;animation:fadeUp .7s ease forwards .4s;}
+.hero-name em{color:var(--accent);font-style:normal;}
+.hero-sub{font-size:16px;color:var(--muted);font-weight:300;max-width:480px;margin-bottom:12px;line-height:1.85;opacity:0;animation:fadeUp .7s ease forwards .6s;}
+.typewriter{font-family:var(--mono);font-size:12px;color:var(--accent);min-height:20px;margin-bottom:36px;opacity:0;animation:fadeUp .7s ease forwards .8s;}
+.cur{display:inline-block;width:2px;height:1em;background:var(--accent);vertical-align:text-bottom;animation:blink .8s step-end infinite;margin-left:1px;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp .7s ease forwards 1s;}
+.hero-terminal-panel{opacity:0;animation:fadeUp .7s ease forwards .9s;}
+
+/* scroll arrow */
+.scroll-arrow{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);opacity:0;animation:fadeUp .7s ease forwards 1.2s;cursor:none;}
+.scroll-arrow svg{animation:bounce 2s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+  font-family:var(--mono);font-size:11px;letter-spacing:1.5px;
+  padding:12px 24px;border-radius:4px;cursor:none;
+  text-decoration:none;transition:all .2s;
+  border:1px solid var(--border2);display:inline-block;
+  position:relative;overflow:hidden;
+}
+.btn span{position:relative;z-index:1;}
+.btn::before{content:'';position:absolute;inset:0;background:var(--accent);transform:translateY(105%);transition:transform .28s cubic-bezier(.16,1,.3,1);}
+.btn-primary{background:var(--accent);color:#000;border-color:var(--accent);}
+.btn-primary::before{background:var(--accent2);transform:translateY(0);}
+.btn-primary:hover::before{transform:translateY(0);background:var(--accent2);}
+.btn-primary:hover{color:#000;}
+.btn-secondary{background:transparent;color:var(--text);}
+.btn-secondary:hover{color:#000;}
+.btn-secondary:hover::before{transform:translateY(0);}
+
+/* scroll arrow */
+.scroll-arrow{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);opacity:0;animation:fadeUp .7s ease forwards 1.2s;cursor:none;}
+.scroll-arrow svg{animation:bounce 2s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+.btn{
+  font-family:var(--mono);font-size:11px;letter-spacing:1.5px;
+  padding:12px 24px;border-radius:4px;cursor:none;
+  text-decoration:none;transition:all .2s;
+  border:1px solid var(--border2);display:inline-block;
+  position:relative;overflow:hidden;
+}
+.btn span{position:relative;z-index:1;}
+.btn::before{content:'';position:absolute;inset:0;background:var(--accent);transform:translateY(105%);transition:transform .28s cubic-bezier(.16,1,.3,1);}
+.btn-primary{background:var(--accent);color:#000;border-color:var(--accent);}
+.btn-primary::before{background:var(--accent2);transform:translateY(0);}
+.btn-primary:hover::before{transform:translateY(0);background:var(--accent2);}
+.btn-primary:hover{color:#000;}
+.btn-secondary{background:transparent;color:var(--text);}
+.btn-secondary:hover{color:#000;}
+.btn-secondary:hover::before{transform:translateY(0);}
+.sec-num{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:4px;margin-bottom:8px;}
+h2.sec-title{font-family:var(--mono);font-size:clamp(22px,3vw,36px);font-weight:700;letter-spacing:-1px;margin-bottom:48px;}
+h2.sec-title em{color:var(--accent);font-style:normal;}
+
+/* ── KINETIC TEXT ── */
+.kinetic-text{
+  font-family:var(--mono);font-size:clamp(28px,5vw,72px);
+  font-weight:700;line-height:1.1;letter-spacing:-2px;
+  padding:72px 52px;max-width:1080px;margin:0 auto;position:relative;z-index:1;
+}
+.kinetic-text .word{display:inline-block;margin-right:.22em;overflow:hidden;vertical-align:bottom;}
+.kinetic-text .word-inner{display:inline-block;transform:translateY(110%);transition:transform .65s cubic-bezier(.16,1,.3,1);color:var(--muted2);}
+.kinetic-text .word-inner.accent{color:var(--accent);}
+.kinetic-text .word.revealed .word-inner{transform:translateY(0);color:var(--text);}
+.kinetic-text .word.revealed .word-inner.accent{color:var(--accent);}
+
+/* ── SCROLL ZOOM ── */
+.scroll-zoom-section{position:relative;z-index:1;min-height:75vh;display:flex;align-items:center;}
+.scroll-zoom-inner{padding:0 52px;max-width:1080px;margin:0 auto;width:100%;}
+.szoom-text{font-family:var(--mono);font-weight:700;line-height:1.05;letter-spacing:-2px;font-size:clamp(28px,5.5vw,80px);will-change:transform;}
+.szoom-word{display:inline-block;margin-right:.18em;transition:color .12s;}
+.szoom-word.dim{color:var(--muted2);}
+.szoom-word.lit{color:var(--text);}
+.szoom-word.accent-lit{color:var(--accent);}
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-36px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(36px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+.reveal-scale{opacity:0;transform:scale(.92);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1);}
+.reveal-scale.visible{opacity:1;transform:scale(1);}
+.d1{transition-delay:.04s!important}.d2{transition-delay:.12s!important}.d3{transition-delay:.2s!important}
+.d4{transition-delay:.28s!important}.d5{transition-delay:.36s!important}.d6{transition-delay:.44s!important}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr;gap:40px;max-width:720px;}
+.about-text p{font-size:15px;color:var(--muted);font-weight:300;margin-bottom:18px;line-height:1.9;}
+.about-text p strong{color:var(--text);font-weight:500;}
+.tag-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.stat-card{
+  background:var(--surface);padding:24px 20px;
+  transition:background .2s,transform .2s;
+  cursor:default;
+}
+.stat-card:hover{background:var(--surface2);transform:scale(1.02);}
+.stat-num{font-family:var(--mono);font-size:26px;color:var(--accent);font-weight:700;display:block;margin-bottom:3px;}
+.stat-label{font-size:10px;color:var(--muted);letter-spacing:1px;}
+
+/* ── TAGS ── */
+.tag{font-family:var(--mono);font-size:10px;color:var(--muted);background:var(--surface2);border:1px solid var(--border2);padding:4px 9px;border-radius:4px;letter-spacing:.5px;transition:color .2s,border-color .2s,background .2s;}
+.tag:hover{color:var(--accent);border-color:rgba(45,212,191,0.3);background:var(--accent-dim);}
+.tag-teal{color:var(--accent);background:var(--accent-dim);border-color:rgba(45,212,191,0.2);}
+.tag-purple{color:#a78bfa;background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.18);}
+.tag-red{color:#f87171;background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.16);}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;padding-left:32px;}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--border2);}
+.tl-item{position:relative;margin-bottom:48px;}
+.tl-dot{position:absolute;left:-36px;top:7px;width:8px;height:8px;border-radius:50%;background:var(--accent);transition:box-shadow .3s,transform .3s;}
+.tl-item:hover .tl-dot{box-shadow:0 0 0 5px rgba(45,212,191,.12);transform:scale(1.3);}
+.tl-period{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:3px;margin-bottom:6px;}
+.tl-header{cursor:none;}
+.tl-header:hover .tl-role{color:var(--accent);}
+.tl-role{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--text);margin-bottom:5px;transition:color .2s;display:inline-flex;align-items:center;gap:7px;}
+.tl-arrow{font-size:11px;opacity:0;transition:opacity .2s,transform .2s;transform:translateX(-4px);}
+.tl-header:hover .tl-arrow{opacity:1;transform:translateX(0);}
+.tl-company-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+.tl-company{font-size:13px;color:var(--muted);}
+.tl-quick-link{font-family:var(--mono);font-size:10px;color:var(--accent);text-decoration:none;letter-spacing:1px;border:1px solid rgba(45,212,191,.22);padding:3px 8px;border-radius:3px;transition:background .2s,border-color .2s;cursor:none;}
+.tl-quick-link:hover{background:var(--accent-dim);border-color:rgba(45,212,191,.5);}
+.tl-badge{font-family:var(--mono);font-size:9px;color:var(--accent);background:var(--accent-dim);border:1px solid rgba(45,212,191,.18);padding:3px 8px;border-radius:20px;letter-spacing:1px;}
+.tl-desc{font-size:14px;color:var(--muted);line-height:1.85;font-weight:300;}
+.tl-skills{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+
+/* ── PROJECTS ── */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.proj-card{
+  background:var(--surface);padding:32px 28px;position:relative;overflow:hidden;
+  transition:background .25s,transform .25s;
+  cursor:none;
+}
+.proj-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),#818cf8);
+  transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.16,1,.3,1);
+}
+.proj-card::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(45,212,191,.04) 0%,transparent 60%);
+  opacity:0;transition:opacity .25s;pointer-events:none;
+}
+.proj-card:hover{background:var(--surface2);}
+.proj-card:hover::before{transform:scaleX(1);}
+.proj-card:hover::after{opacity:1;}
+.proj-num{font-family:var(--mono);font-size:10px;color:var(--muted2);letter-spacing:2px;margin-bottom:12px;}
+.proj-title{font-family:var(--mono);font-size:15px;color:var(--text);font-weight:700;margin-bottom:9px;letter-spacing:-.5px;}
+.proj-desc{font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:14px;}
+.proj-note{font-family:var(--mono);font-size:10px;color:var(--muted2);letter-spacing:1px;margin-bottom:16px;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;}
+
+/* ── RESEARCH ── */
+.research-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.research-card{
+  background:var(--surface);padding:24px 28px;display:flex;gap:18px;align-items:flex-start;
+  transition:background .2s,padding-left .2s;text-decoration:none;cursor:none;
+}
+.research-card:hover{background:var(--surface2);padding-left:36px;}
+.research-icon{font-family:var(--mono);font-size:14px;color:var(--accent);min-width:36px;margin-top:2px;}
+.research-journal{font-family:var(--mono);font-size:10px;color:var(--muted2);letter-spacing:2px;margin-bottom:5px;}
+.research-title{font-size:14px;color:var(--text);font-weight:500;margin-bottom:5px;line-height:1.5;}
+.research-date{font-family:var(--mono);font-size:10px;color:var(--muted);}
+
+/* ── SKILLS ── */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;}
+.skill-group-label{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:3px;margin-bottom:12px;}
+.skill-tag-cloud{display:flex;flex-wrap:wrap;gap:6px;}
+
+/* ── INTERACTIVE TERMINAL ── */
+.terminal-wrap{
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;
+  transition:border-color .2s;
+}
+.terminal-wrap:focus-within{border-color:rgba(45,212,191,0.25);}
+.terminal-header{
+  background:var(--surface2);padding:10px 16px;display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid var(--border);user-select:none;
+}
+.term-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.term-dot:hover{filter:brightness(1.3);}
+.term-body{padding:16px 18px;font-family:var(--mono);font-size:12px;min-height:220px;max-height:340px;overflow-y:auto;scroll-behavior:smooth;}
+.term-line{margin-bottom:5px;line-height:1.6;}
+.term-prompt{color:var(--accent);}
+.term-output{color:var(--muted);}
+.term-input-row{display:flex;align-items:center;gap:6px;padding:0 18px 14px;}
+.term-input{flex:1;background:none;border:none;outline:none;font-family:var(--mono);font-size:12px;color:var(--text);cursor:none;}
+.term-input::placeholder{color:var(--muted2);}
+
+/* fullscreen terminal overlay */
+#terminal-wrap.fullscreen{
+  position:fixed;inset:40px;z-index:5000;border-radius:12px;
+  border:1px solid rgba(45,212,191,0.3);
+  box-shadow:0 0 80px rgba(0,0,0,0.8);
+  display:flex;flex-direction:column;
+  background:var(--surface);
+}
+#terminal-wrap.fullscreen .term-body{
+  flex:1;max-height:none;min-height:0;
+}
+#terminal-wrap.fullscreen #term-expand-btn{content:'[F] exit';}
+.term-overlay-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:4999;
+  display:none;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+}
+.term-overlay-bg.show{display:block;}
+
+/* pong canvas in terminal */
+#pong-canvas{
+  display:block;background:#000;border:1px solid var(--border2);
+  border-radius:4px;margin:8px 0;
+  image-rendering:pixelated;
+}
+
+/* ── RESUME BUTTON ── */
+.resume-btn{background:var(--accent-dim);border-color:rgba(45,212,191,0.35) !important;color:var(--accent) !important;cursor:none;}
+.resume-btn:hover{background:rgba(45,212,191,0.18) !important;}
+
+/* ── RESUME MODAL ── */
+.resume-modal-bg{position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,0.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s,visibility .3s;padding:20px;}
+.resume-modal-bg.open{opacity:1;visibility:visible;pointer-events:all;}
+.resume-modal-box{background:var(--surface);border:1px solid rgba(45,212,191,0.2);border-radius:12px;overflow:hidden;width:100%;max-width:560px;transform:scale(0.95) translateY(10px);transition:transform .3s cubic-bezier(.16,1,.3,1);box-shadow:0 24px 80px rgba(0,0,0,0.6);}
+.resume-modal-bg.open .resume-modal-box{transform:scale(1) translateY(0);}
+.resume-modal-header{background:var(--surface2);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);}
+.resume-modal-title{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:3px;}
+.resume-modal-body{padding:28px 28px 24px;}
+.resume-modal-intro{margin-bottom:24px;}
+.resume-intro-line{font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:3px;letter-spacing:0.5px;}
+.resume-field-group{margin-bottom:18px;}
+.resume-label{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:3px;display:block;margin-bottom:6px;}
+.resume-input{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-family:var(--sans);font-size:14px;padding:11px 14px;border-radius:4px;outline:none;transition:border-color .2s;cursor:none;}
+.resume-input:focus{border-color:rgba(45,212,191,0.45);}
+.resume-textarea{resize:none;min-height:90px;}
+.resume-reason-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+.resume-reason-btn{font-family:var(--mono);font-size:10px;letter-spacing:0.5px;color:var(--muted);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:9px 12px;cursor:none;transition:color .15s,border-color .15s,background .15s;text-align:left;}
+.resume-reason-btn:hover{color:var(--text);border-color:var(--border2);}
+.resume-reason-btn.selected{color:var(--accent);background:var(--accent-dim);border-color:rgba(45,212,191,0.35);}
+.resume-submit-btn{font-family:var(--mono);font-size:11px;letter-spacing:2px;padding:13px 28px;border-radius:4px;cursor:none;background:var(--accent);color:#000;border:none;transition:background .2s,transform .15s;}
+.resume-submit-btn:hover{background:var(--accent2);}
+.resume-submit-btn:active{transform:scale(0.97);}
+.resume-submit-btn:disabled{opacity:0.5;}
+.resume-status{font-family:var(--mono);font-size:11px;letter-spacing:1px;opacity:0;transition:opacity .3s;}
+.resume-status.show{opacity:1;}
+.resume-status.ok{color:var(--accent);}
+.resume-status.err{color:#f87171;}
+
+/* ── CONTACT ── */
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.contact-text h3{font-family:var(--mono);font-size:22px;font-weight:700;letter-spacing:-.5px;margin-bottom:12px;}
+.contact-text p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:28px;font-weight:300;}
+.contact-links{display:flex;flex-direction:column;}
+.contact-link{
+  display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;
+  color:var(--muted);text-decoration:none;padding:13px 0;
+  border-bottom:1px solid var(--border);transition:color .2s,padding-left .2s;cursor:none;
+}
+.contact-link:hover{color:var(--accent);padding-left:5px;}
+.contact-link-label{font-size:9px;letter-spacing:3px;color:var(--accent);min-width:68px;}
+.contact-form{display:flex;flex-direction:column;gap:12px;}
+.form-group{display:flex;flex-direction:column;gap:4px;}
+.form-group label{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:3px;}
+.form-group input,.form-group textarea{
+  background:var(--surface);border:1px solid var(--border);color:var(--text);
+  font-family:var(--sans);font-size:14px;padding:11px 14px;border-radius:4px;
+  outline:none;transition:border-color .2s,background .2s;resize:none;cursor:none;
+}
+.form-group input:focus,.form-group textarea:focus{border-color:rgba(45,212,191,.5);background:var(--surface2);}
+.form-group textarea{min-height:110px;}
+
+/* ── LINK MODAL ── */
+#link-modal{
+  position:fixed;inset:0;z-index:9000;background:rgba(10,10,10,0.96);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;
+  opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s,visibility .3s;
+}
+#link-modal.open{opacity:1;visibility:visible;pointer-events:all;}
+#lm-label{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:4px;}
+#lm-title{font-family:var(--mono);font-size:clamp(16px,2.5vw,24px);font-weight:700;color:var(--text);text-align:center;}
+#lm-sub{font-size:13px;color:var(--muted);text-align:center;margin-top:-12px;}
+#lm-items{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.lm-btn{
+  font-family:var(--mono);font-size:12px;letter-spacing:1px;padding:14px 24px;
+  border-radius:6px;cursor:none;text-decoration:none;color:var(--text);
+  border:1px solid var(--border2);background:var(--surface);
+  transition:border-color .2s,background .2s,color .2s;
+  display:flex;flex-direction:column;align-items:center;gap:4px;min-width:140px;text-align:center;
+}
+.lm-btn:hover{border-color:var(--accent);background:var(--accent-dim);color:var(--accent);}
+.lm-btn small{font-size:9px;color:var(--muted);font-family:var(--sans);}
+#lm-ext{font-family:var(--mono);font-size:10px;color:var(--muted2);letter-spacing:2px;display:none;}
+.lm-close{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:3px;background:none;border:none;cursor:none;padding:6px 16px;transition:color .2s;margin-top:4px;}
+.lm-close:hover{color:var(--text);}
+
+footer{
+  position:relative;z-index:1;text-align:center;padding:28px;
+  font-family:var(--mono);font-size:10px;color:var(--muted2);letter-spacing:2px;
+  border-top:1px solid var(--border);
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── MOBILE FIRST ── */
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr 440px;gap:36px;padding:90px 4% 60px 6%;}
+}
+@media(max-width:900px){
+  body{cursor:auto;}
+  #cursor,#cursor-trail{display:none;}
+  nav{padding:13px 20px;}
+  .nav-links{display:none;}
+  .nav-socials{gap:6px;}
+  .hero-grid{grid-template-columns:1fr;padding:90px 20px 60px;gap:32px;}
+  .wrap{padding:0 20px;}
+  .kinetic-text,.scroll-zoom-inner{padding:48px 20px;}
+  .about-grid{grid-template-columns:1fr;gap:40px;}
+  .skills-grid{grid-template-columns:1fr 1fr;gap:24px;}
+  .contact-inner{grid-template-columns:1fr;gap:40px;}
+  .projects-grid{grid-template-columns:1fr;}
+  #lm-items{flex-direction:column;align-items:stretch;width:88%;max-width:300px;}
+  section{padding:60px 0;}
+
+  /* kill all scroll animations - mobile can't handle them */
+  .reveal,.reveal-left,.reveal-right,.reveal-scale{
+    opacity:1 !important;transform:none !important;transition:none !important;
+  }
+  .kinetic-text .word-inner{
+    transform:none !important;transition:none !important;color:var(--text) !important;
+  }
+  .kinetic-text .word-inner.accent{color:var(--accent) !important;}
+  .szoom-word{color:var(--text) !important;transition:none !important;}
+  .szoom-word.accent-lit,.szoom-word.dim{color:var(--text) !important;}
+  .szoom-text{transform:none !important;will-change:auto !important;}
+  .scroll-zoom-section{min-height:auto;}
+
+  /* no card scale transforms */
+  .proj-card,.research-card{transform:none !important;transition:background .15s !important;}
+  .tag{transition:none !important;}
+
+  /* disable expensive GPU effects */
+  #mouse-glow{display:none;}
+  nav{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;background:rgba(10,10,10,0.97) !important;}
+  .term-overlay-bg{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
+  .resume-modal-bg{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;background:rgba(0,0,0,0.95) !important;}
+  #link-modal{backdrop-filter:none !important;-webkit-backdrop-filter:none !important;}
+
+  /* ascii art on mobile */
+  #ascii-art{font-size:clamp(7px,1.8vw,12px);}
+
+  /* hero animations - just fade, no movement */
+  .hero-tag,.hero-name,.hero-sub,.typewriter,.hero-cta,.hero-terminal-panel{
+    animation-duration:.4s !important;
+  }
+}
+@media(max-width:560px){
+  .skills-grid{grid-template-columns:1fr;}
+  .hero-name{font-size:clamp(38px,10vw,60px);}
+  .nav-socials{display:none;}
+  #ascii-art{font-size:clamp(5px,2.2vw,9px);}
+}
+/* prefers-reduced-motion - respect system setting */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;}
+  .reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1;transform:none;}
+}
+/* tap targets for mobile */
+@media(hover:none){
+  .tag{padding:7px 12px;}
+  .btn{padding:14px 26px;}
+  .tl-quick-link{padding:6px 12px;}
+  .nav-soc{padding:7px 12px;}
+}
+</style>
+</head>
+<body>
+
+<div class="term-overlay-bg" id="term-overlay" onclick="termToggleFull()"></div>
+
+<!-- SPLASH -->
+<div id="splash">
+  <pre id="ascii-art"></pre>
+  <div id="splash-name">AADITYA BHARAT SINGH</div>
+  <button id="splash-skip" onclick="hideSplash()">[ TAP / PRESS ANY KEY TO SKIP ]</button>
+</div>
+
+<!-- LINK MODAL -->
+<div id="link-modal">
+  <div id="lm-label">LINKS</div>
+  <div id="lm-title"></div>
+  <div id="lm-sub"></div>
+  <div id="lm-items"></div>
+  <div id="lm-ext">// OPENING EXTERNAL SITE</div>
+  <button class="lm-close" onclick="closeModal()">[ ESC / CLOSE ]</button>
+</div>
+
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-left">
+    <div class="nav-logo">A<span>B</span>S</div>
+    <ul class="nav-links">
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#experience">EXP</a></li>
+      <li><a href="#projects">PROJECTS</a></li>
+      <li><a href="#research">RESEARCH</a></li>
+      <li><a href="#skills">SKILLS</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+  </div>
+  <div class="nav-socials">
+    <a href="#" class="nav-soc" onclick="openSingle('https://www.linkedin.com/in/aadityabharatsingh/','LinkedIn');return false;">LI</a>
+    <a href="#" class="nav-soc" onclick="openSingle('https://www.instagram.com/aadityabsingh','Instagram');return false;">IG</a>
+    <a href="mailto:aadityabharatsingh81@gmail.com" class="nav-soc">EMAIL</a>
+    <button class="nav-soc resume-btn" onclick="openResume()">REQUEST RESUME</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="padding:0;max-width:100%;">
+  <div class="hero-grid">
+    <!-- LEFT: intro -->
+    <div class="hero-inner">
+      <div class="hero-tag">// STUDENT @ UW–MADISON &nbsp;·&nbsp; DEVELOPER &nbsp;·&nbsp; ROBOTICIST</div>
+      <h1 class="hero-name">Aaditya<br><em>Bharat Singh.</em></h1>
+      <p class="hero-sub">Building robots, apps, and interfaces that do something awesome.</p>
+      <div class="typewriter" id="typewriter"><span class="cur"></span></div>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary"><span>VIEW PROJECTS</span></a>
+        <a href="#contact" class="btn btn-secondary"><span>GET IN TOUCH</span></a>
+      </div>
+    </div>
+    <!-- RIGHT: terminal -->
+    <div class="hero-terminal-panel">
+      <div class="terminal-wrap" id="terminal-wrap">
+        <div class="terminal-header">
+          <div class="term-dot" id="term-btn-close" title="close" style="background:#ff5f57;cursor:none;" onclick="termClose()"></div>
+          <div class="term-dot" style="background:#febc2e;cursor:none;"></div>
+          <div class="term-dot" id="term-btn-full" title="fullscreen" style="background:#28c840;cursor:none;" onclick="termToggleFull()"></div>
+          <span style="font-family:var(--mono);font-size:10px;color:var(--muted);margin-left:8px;letter-spacing:2px;flex:1;">abs@portfolio ~ $</span>
+          <span id="term-expand-btn" onclick="termToggleFull()" style="font-family:var(--mono);font-size:9px;color:var(--muted2);letter-spacing:1px;cursor:none;transition:color .2s;padding:0 4px;" title="press F to fullscreen">[F] fullscreen</span>
+        </div>
+        <div class="term-body" id="term-body">
+          <div class="term-line"><span class="term-output">// type 'help' to see what you can do</span></div>
+        </div>
+        <div class="term-input-row">
+          <span class="term-prompt" style="font-family:var(--mono);font-size:12px;white-space:nowrap;">abs@portfolio:~$&nbsp;</span>
+          <input class="term-input" id="term-input" type="text" placeholder="enter command..." autocomplete="off" spellcheck="false"/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-arrow">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M10 3v14M3 10l7 7 7-7" stroke="rgba(45,212,191,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- KINETIC 1 -->
+<div class="kinetic-text" id="kinetic1"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="reveal"><div class="sec-num">// 01</div><h2 class="sec-title">ABOUT <em>ME</em></h2></div>
+    <div class="about-grid">
+      <div class="about-text reveal-left">
+        <p>Hey! I'm <strong>Aaditya</strong> — an EE student at UW–Madison who loves building things at the intersection of hardware and software. When I'm not soldering circuits, I'm writing code, designing robots, or shredding guitar.</p>
+        <p>I've been volunteering with the <strong>Jala Poshan Foundation</strong> since 2018, and in 2024 built their volunteer management app. I also interned at <strong>ARTPARK @ IISc</strong> as an embedded systems intern and at <strong>BIAL</strong> on airport sound management and environmental systems.</p>
+        <p>I care about building things that actually matter — whether that's a drone, a conservation app, or a UI that makes someone's day a bit easier.</p>
+        <div class="tag-row">
+          <span class="tag tag-teal">ARDUINO</span><span class="tag tag-teal">RASPBERRY PI</span>
+          <span class="tag tag-purple">REACT NATIVE</span><span class="tag tag-purple">FLUTTER</span>
+          <span class="tag tag-red">ROBOTICS</span><span class="tag">PCB DESIGN</span>
+          <span class="tag tag-teal">PYTHON</span><span class="tag">C / C++</span>
+          <span class="tag tag-purple">FIREBASE</span><span class="tag">ESP32</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCROLL ZOOM -->
+<div class="scroll-zoom-section" id="szoom1">
+  <div class="scroll-zoom-inner"><div class="szoom-text" id="szoom-text1"></div></div>
+</div>
+
+<!-- EDUCATION + EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="reveal"><div class="sec-num">// 02</div><h2 class="sec-title">EDUCATION & <em>EXPERIENCE</em></h2></div>
+    <div class="timeline">
+
+      <div class="tl-item reveal d1">
+        <div class="tl-dot" style="background:var(--accent);"></div>
+        <div class="tl-period">2025 — 2029</div>
+        <div class="tl-header" onclick="openMulti('UW–Madison','University of Wisconsin–Madison',[{label:'UW–Madison',sub:'wisc.edu',url:'https://www.wisc.edu/'},{label:'College of Engineering',sub:'engineering.wisc.edu',url:'https://engineering.wisc.edu/'}])">
+          <div class="tl-role">B.S. Electrical Engineering <span class="tl-arrow">↗</span></div>
+        </div>
+        <div class="tl-company-row">
+          <span class="tl-company">University of Wisconsin–Madison &nbsp;·&nbsp; Madison, WI</span>
+          <span class="tl-badge">CLASS OF 2029</span>
+        </div>
+        <div class="tl-desc">Pursuing a B.S. in Electrical Engineering at one of the top public engineering programs in the US.</div>
+        <div class="tl-skills">
+          <span class="tag">Circuits</span><span class="tag">Embedded Systems</span><span class="tag tag-teal">C / C++</span><span class="tag tag-teal">MATLAB</span><span class="tag">Signal Processing</span><span class="tag">EM Fields</span>
+        </div>
+      </div>
+
+      <div class="tl-item reveal d2" style="margin-left:28px;padding-left:20px;border-left:1px solid rgba(45,212,191,0.15);">
+        <div class="tl-dot" style="background:var(--accent-light);left:-48px;width:7px;height:7px;top:8px;"></div>
+        <div class="tl-period">2025 — PRESENT</div>
+        <div class="tl-header" onclick="openSingle('https://www.wisconsinracing.org/','Wisconsin Racing — UW-Madison Formula SAE')">
+          <div class="tl-role" style="font-size:14px;">Electrical Engineer — Formula SAE <span class="tl-arrow">↗</span></div>
+        </div>
+        <div class="tl-company-row">
+          <span class="tl-company">Wisconsin Racing @ UW–Madison</span>
+          <a class="tl-quick-link" href="#" onclick="openSingle('https://www.wisconsinracing.org/','Wisconsin Racing');return false;">SITE ↗</a>
+        </div>
+        <div class="tl-desc">Part of the electrical sub-team at Wisconsin Racing — UW-Madison's Formula SAE team. Designing, building, testing and racing a formula-style race car to compete in international FSAE competition.</div>
+        <div class="tl-skills">
+          <span class="tag tag-teal">Embedded Systems</span><span class="tag tag-teal">C / C++</span><span class="tag">PCB Design</span><span class="tag">CAN Bus</span><span class="tag">Firmware</span><span class="tag">Vehicle Electronics</span>
+        </div>
+      </div>
+
+      <div class="tl-item reveal d3">
+        <div class="tl-dot"></div>
+        <div class="tl-period">AUG 2024 — JAN 2025</div>
+        <div class="tl-header" onclick="openMulti('ARTPARK @ IISc','Embedded Systems Intern',[{label:'IISc',sub:'iisc.ac.in',url:'https://iisc.ac.in/'},{label:'ARTPARK',sub:'artpark.in',url:'https://www.artpark.in/'},{label:'COMRADO',sub:'comradoaerospace.com',url:'https://www.comradoaerospace.com/'}])">
+          <div class="tl-role">Embedded Systems Intern <span class="tl-arrow">↗</span></div>
+        </div>
+        <div class="tl-company-row">
+          <span class="tl-company">ARTPARK @ Indian Institute of Science, Bengaluru</span>
+          <a class="tl-quick-link" href="#" onclick="openMulti('ARTPARK @ IISc','Embedded Systems Intern',[{label:'IISc',sub:'iisc.ac.in',url:'https://iisc.ac.in/'},{label:'ARTPARK',sub:'artpark.in',url:'https://www.artpark.in/'},{label:'COMRADO',sub:'comradoaerospace.com',url:'https://www.comradoaerospace.com/'}]);return false;">LINKS ↗</a>
+        </div>
+        <div class="tl-desc">Worked as an embedded systems intern at one of India's leading tech innovation parks.</div>
+        <div class="tl-skills">
+          <span class="tag tag-teal">ROS</span><span class="tag tag-teal">ArduPilot</span><span class="tag tag-teal">Embedded Systems</span><span class="tag tag-teal">Arduino</span><span class="tag tag-teal">Linux</span><span class="tag tag-teal">Python</span><span class="tag">C++</span><span class="tag">C</span><span class="tag tag-purple">Machine Learning</span><span class="tag tag-purple">TensorFlow</span><span class="tag tag-purple">Scikit-Learn</span><span class="tag">LaTeX</span><span class="tag">SQL</span>
+        </div>
+      </div>
+
+      <div class="tl-item reveal d4">
+        <div class="tl-dot"></div>
+        <div class="tl-period">MAR 2024 — PRESENT</div>
+        <div class="tl-header">
+          <div class="tl-role">Lead Application Developer</div>
+        </div>
+        <div class="tl-company-row">
+          <span class="tl-company">Jala Poshan @ Jakkur Lake, Bengaluru</span>
+        </div>
+        <div class="tl-desc">Designed and built a cross-platform volunteer management app from the ground up. Replaced a cumbersome WhatsApp workflow with structured registration, contribution tracking, and event discovery. Targeting App Store and Google Play.</div>
+        <div class="tl-skills">
+          <span class="tag tag-purple">Flutter</span><span class="tag tag-purple">React Native</span><span class="tag tag-purple">JavaScript</span><span class="tag tag-teal">C</span><span class="tag tag-purple">Android Studio</span><span class="tag">Mobile App Design</span><span class="tag tag-purple">Firebase</span>
+        </div>
+      </div>
+
+      <div class="tl-item reveal d5">
+        <div class="tl-dot"></div>
+        <div class="tl-period">JUN 2024 — JUL 2024</div>
+        <div class="tl-header" onclick="openSingle('https://www.bengaluruairport.com/','Bangalore International Airport')">
+          <div class="tl-role">Intern — Engineering & Maintenance <span class="tl-arrow">↗</span></div>
+        </div>
+        <div class="tl-company-row">
+          <span class="tl-company">Bangalore International Airport Ltd (BIAL)</span>
+          <a class="tl-quick-link" href="#" onclick="openSingle('https://www.bengaluruairport.com/','BIAL');return false;">BIAL ↗</a>
+        </div>
+        <div class="tl-desc">Analysed and recommended improvements to air pollution and noise management at Kempegowda International Airport. Benchmarked international airport strategies and produced a formal enhancement report.</div>
+        <div class="tl-skills">
+          <span class="tag">Research Skills</span><span class="tag">Environmental Compliance</span><span class="tag">Environmental Policy</span><span class="tag">Environmental Impact Assessment</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- KINETIC 2 -->
+<div class="kinetic-text" id="kinetic2"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="reveal"><div class="sec-num">// 03</div><h2 class="sec-title">FEATURED <em>PROJECTS</em></h2></div>
+    <div class="projects-grid">
+      <div class="proj-card reveal-scale d1">
+        <div class="proj-num">PROJECT / 001</div><div class="proj-title">Jalaposhan App</div>
+        <p class="proj-desc">Cross-platform volunteer management app for Jakkur Lake conservation. Replaced WhatsApp chaos with structured registration, event tracking, and contribution logs.</p>
+        <div class="proj-note">// COMING SOON — APP STORE & GOOGLE PLAY</div>
+        <div class="proj-tags"><span class="tag tag-purple">FLUTTER</span><span class="tag tag-purple">REACT NATIVE</span><span class="tag tag-teal">FIREBASE</span></div>
+      </div>
+      <div class="proj-card reveal-scale d2">
+        <div class="proj-num">PROJECT / 002</div><div class="proj-title">Arduino FPV Drone</div>
+        <p class="proj-desc">Full FPV quadcopter merging Arduino quadcopter and GPS programs. Started from LEGO prototype, evolved into a fully flying machine.</p>
+        <div class="proj-note">// HARDWARE BUILD</div>
+        <div class="proj-tags"><span class="tag tag-teal">ARDUINO</span><span class="tag">GPS</span><span class="tag tag-red">FPV</span><span class="tag">ARDUPILOT</span></div>
+      </div>
+      <div class="proj-card reveal-scale d3">
+        <div class="proj-num">PROJECT / 003</div><div class="proj-title">ESP32 RFID Access System</div>
+        <p class="proj-desc">Smart access control using ESP32 — pre-registered RFID cards trigger a relay, unknown cards denied instantly.</p>
+        <div class="proj-note">// HARDWARE BUILD</div>
+        <div class="proj-tags"><span class="tag tag-teal">ESP32</span><span class="tag">RFID</span><span class="tag">C++</span><span class="tag">RELAY</span></div>
+      </div>
+      <div class="proj-card reveal-scale d4">
+        <div class="proj-num">PROJECT / 004</div><div class="proj-title">Arduino Spot Welder</div>
+        <p class="proj-desc">Repurposed a microwave transformer with a custom Arduino control circuit — recycling old hardware with digital precision.</p>
+        <div class="proj-note">// HARDWARE BUILD</div>
+        <div class="proj-tags"><span class="tag tag-teal">ARDUINO</span><span class="tag">POWER ELECTRONICS</span><span class="tag tag-red">HARDWARE</span></div>
+      </div>
+      <div class="proj-card reveal-scale d5">
+        <div class="proj-num">PROJECT / 005</div><div class="proj-title">EV3 Self-Balancing Robot</div>
+        <p class="proj-desc">Two-wheeled self-balancing robot from LEGO EV3. Detects objects, balances dynamically, expresses "emotions" from color perception.</p>
+        <div class="proj-note">// ROBOTICS BUILD</div>
+        <div class="proj-tags"><span class="tag tag-red">LEGO EV3</span><span class="tag">PID CONTROL</span><span class="tag">SENSORS</span></div>
+      </div>
+      <div class="proj-card reveal-scale d6">
+        <div class="proj-num">PROJECT / 006</div><div class="proj-title">Sumo Bot V2</div>
+        <p class="proj-desc">Competition-grade sumo robot for Roboparade. Front lifting mechanism plus tank tracks for superior grip and obstacle climbing.</p>
+        <div class="proj-note">// ROBOPARADE COMPETITION</div>
+        <div class="proj-tags"><span class="tag tag-red">COMPETITION</span><span class="tag tag-teal">ARDUINO</span><span class="tag">MECHANICAL DESIGN</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="wrap">
+    <div class="reveal"><div class="sec-num">// 04</div><h2 class="sec-title">MY <em>RESEARCH</em></h2></div>
+    <div class="research-list">
+      <a href="#" onclick="openSingle('https://rjpn.org/ijcspub/viewpaperforall.php?paper=IJCSP24B1274','IJCSPUB Journal');return false;" class="research-card reveal d1">
+        <div class="research-icon">[01]</div>
+        <div>
+          <div class="research-journal">IJCSPUB · INTERNATIONAL JOURNAL OF CURRENT SCIENCES</div>
+          <div class="research-title">The Transformative Landscape of AI-Powered Robotics: Innovations, Challenges and Ethical Considerations</div>
+          <div class="research-date">PUBLISHED — JUN 2, 2024</div>
+        </div>
+      </a>
+      <a href="#" onclick="openSingle('https://rjpn.org/ijcspub/viewpaperforall.php?paper=IJCSP24B1197','IJCSPUB Journal');return false;" class="research-card reveal d2">
+        <div class="research-icon">[02]</div>
+        <div>
+          <div class="research-journal">IJCSPUB · INTERNATIONAL JOURNAL OF CURRENT SCIENCES</div>
+          <div class="research-title">Comparison & Analysis of AMD Chips & Intel Chips</div>
+          <div class="research-date">PUBLISHED — MAY 2, 2024</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="reveal"><div class="sec-num">// 05</div><h2 class="sec-title">SKILLS & <em>TOOLS</em></h2></div>
+    <div class="skills-grid">
+      <div class="reveal d1">
+        <div class="skill-group-label">// HARDWARE</div>
+        <div class="skill-tag-cloud">
+          <span class="tag tag-teal">Arduino</span><span class="tag tag-teal">Raspberry Pi</span>
+          <span class="tag tag-teal">ESP32</span><span class="tag">PCB Design</span>
+          <span class="tag">Ardupilot</span><span class="tag">KiCad</span>
+          <span class="tag">LEGO EV3 / NXT</span><span class="tag tag-red">Drones / FPV</span>
+          <span class="tag">Oscilloscope</span><span class="tag">Soldering</span>
+        </div>
+      </div>
+      <div class="reveal d2">
+        <div class="skill-group-label">// SOFTWARE</div>
+        <div class="skill-tag-cloud">
+          <span class="tag tag-teal">Python</span><span class="tag">C / C++</span>
+          <span class="tag">JavaScript</span><span class="tag tag-purple">React Native</span>
+          <span class="tag tag-purple">Flutter</span><span class="tag tag-purple">Firebase</span>
+          <span class="tag">Node.js</span><span class="tag">MATLAB</span>
+          <span class="tag">Git / GitHub</span>
+        </div>
+      </div>
+      <div class="reveal d3">
+        <div class="skill-group-label">// TOOLS & OTHER</div>
+        <div class="skill-tag-cloud">
+          <span class="tag tag-teal">VS Code</span><span class="tag">Figma</span>
+          <span class="tag">Linux</span><span class="tag">3D Printing</span>
+          <span class="tag tag-red">Robotics Design</span>
+          <span class="tag">Research & Writing</span>
+          <span class="tag">Circuit Simulation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="reveal"><div class="sec-num">// 06</div><h2 class="sec-title">GET IN <em>TOUCH</em></h2></div>
+    <div class="contact-inner">
+      <div class="contact-text reveal-left">
+        <h3>Let's build something.</h3>
+        <p>Whether you have a project, a research collab, an internship opportunity, or just want to talk robots and code — my inbox is always open.</p>
+        <div class="contact-links">
+          <a href="mailto:aadityabharatsingh81@gmail.com" class="contact-link"><span class="contact-link-label">EMAIL</span>aadityabharatsingh81@gmail.com</a>
+          <a href="#" onclick="openSingle('https://www.linkedin.com/in/aadityabharatsingh/','LinkedIn');return false;" class="contact-link"><span class="contact-link-label">LINKEDIN</span>linkedin.com/in/aadityabharatsingh</a>
+          <a href="#" onclick="openSingle('https://www.instagram.com/aadityabsingh','Instagram');return false;" class="contact-link"><span class="contact-link-label">INSTAGRAM</span>@aadityabsingh</a>
+        </div>
+      </div>
+      <div class="contact-form reveal-right">
+        <div class="form-group"><label>NAME</label><input id="cf-name" type="text" placeholder="Your name"/></div>
+        <div class="form-group"><label>EMAIL</label><input id="cf-email" type="email" placeholder="your@email.com"/></div>
+        <div class="form-group"><label>MESSAGE</label><textarea id="cf-message" placeholder="Hey Aaditya, I'd love to..."></textarea></div>
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+          <button class="btn btn-primary" id="cf-submit-btn" onclick="submitContact()" style="align-self:flex-start;border:none;"><span id="cf-btn-text">SEND MESSAGE</span></button>
+          <span id="cf-status" style="font-family:var(--mono);font-size:11px;letter-spacing:1px;opacity:0;transition:opacity .3s;"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME REQUEST MODAL -->
+<div id="resume-modal" class="resume-modal-bg" onclick="handleResumeOverlayClick(event)">
+  <div class="resume-modal-box">
+    <div class="resume-modal-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="term-dot" style="background:#ff5f57;cursor:none;" onclick="closeResume()"></div>
+        <div class="term-dot" style="background:#febc2e;"></div>
+        <div class="term-dot" style="background:#28c840;"></div>
+      </div>
+      <span class="resume-modal-title">REQUEST RESUME</span>
+      <span style="width:60px;"></span>
+    </div>
+    <div class="resume-modal-body">
+      <div class="resume-modal-intro">
+        <div class="resume-intro-line">// fill in the details below</div>
+        <div class="resume-intro-line" style="color:var(--muted2);">// i'll get back to you shortly</div>
+      </div>
+      <div id="resume-form">
+        <div class="resume-field-group">
+          <label class="resume-label">YOUR NAME</label>
+          <input id="rf-name" class="resume-input" type="text" placeholder="John Doe" autocomplete="name"/>
+        </div>
+        <div class="resume-field-group">
+          <label class="resume-label">YOUR EMAIL</label>
+          <input id="rf-email" class="resume-input" type="email" placeholder="john@company.com" autocomplete="email"/>
+        </div>
+        <div class="resume-field-group">
+          <label class="resume-label">COMPANY / ORGANIZATION</label>
+          <input id="rf-company" class="resume-input" type="text" placeholder="Acme Corp (optional)"/>
+        </div>
+        <div class="resume-field-group">
+          <label class="resume-label">REASON FOR REQUEST</label>
+          <div class="resume-reason-grid">
+            <button class="resume-reason-btn" onclick="selectReason(this)">Internship Opportunity</button>
+            <button class="resume-reason-btn" onclick="selectReason(this)">Full-time Role</button>
+            <button class="resume-reason-btn" onclick="selectReason(this)">Research Collaboration</button>
+            <button class="resume-reason-btn" onclick="selectReason(this)">General Interest</button>
+          </div>
+          <input id="rf-reason" type="hidden" value=""/>
+        </div>
+        <div class="resume-field-group">
+          <label class="resume-label">ADDITIONAL CONTEXT <span style="color:var(--muted2);font-size:9px;">(OPTIONAL)</span></label>
+          <textarea id="rf-message" class="resume-input resume-textarea" placeholder="Tell me a bit about the opportunity or what you're looking for..."></textarea>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+          <button class="resume-submit-btn" onclick="submitResume()">
+            <span id="resume-btn-text">SEND REQUEST</span>
+          </button>
+          <span id="resume-status" class="resume-status"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>AADITYA BHARAT SINGH &nbsp;·&nbsp; © 2025 &nbsp;·&nbsp; MADISON, WI</footer>
+
+<script>
+/* ── ASCII SPLASH ── */
+const asciiLines=[
+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⢴⣤⣠⣤⢤⣂⣔⣲⣒⣖⡺⢯⣝⡿⣿⣿⣿⣷⣶⣶⣢⢦⣤⣄⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣯⣿⣾⣿⣶⣺⣯⡿⣓⣽⢞⡸⣻⢏⣋⠌⣛⣭⣿⢟⣿⣛⣿⢷⣿⣿⣿⡟⣿⣻⣵⣲⢢⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+"⠀⠀⠀⠀⠀⠀⢀⣀⣤⡴⠲⠶⢦⠤⢤⡤⠿⠿⠿⠿⣿⣽⣿⣽⣷⣿⢽⣾⣷⣭⡞⣩⡐⠏⡋⣽⡬⣭⠏⢍⣞⢿⣽⣿⣷⢿⣿⣿⡿⠾⣿⢶⡶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀",
+"⠀⠀⠀⠀⣤⣖⠯⡙⢢⡁⠄⢢⡤⢠⢀⣸⠀⣄⡠⣀⣀⣦⡄⣠⢀⡃⠽⣽⠬⠍⣿⣿⣤⣥⣷⣿⣿⣿⣾⡍⠛⢌⠈⢫⣍⢋⣍⡁⠹⢍⠈⣳⢎⠴⠟⠻⢧⣄⠀⠀⠀⠀⠀",
+"⠀⠀⣠⣾⣿⣿⣿⣯⡔⠆⠠⠈⣿⣿⠾⡾⠿⣶⠿⡟⣻⡛⣭⢙⠍⢩⠭⢩⡳⢮⡿⡿⢿⣿⣿⣧⣿⣽⣮⣤⣥⣩⣶⣟⣻⠧⣻⠶⢤⢰⡱⣬⣤⣌⣑⠞⠲⠓⠭⡀⠀⠀⠀",
+"⠀⠐⣿⣿⣿⢟⡋⢈⢤⣤⣷⢿⣿⠒⢜⣁⡱⡧⢿⣹⣷⣿⡿⣷⠌⣢⣟⢱⢽⡨⢊⠴⡉⢉⡿⣯⢿⣏⢹⠏⣯⣩⣙⠾⢿⣳⣶⢻⣟⣿⠧⢀⠋⠟⣿⡧⠠⠄⡤⠈⢠⠀⠀",
+"⠀⠀⠘⠻⠿⠶⠶⠿⠛⣹⣟⡞⠸⣬⠐⠙⢍⢉⣔⠪⠟⡛⠫⢵⣾⣣⣼⣽⢈⠔⡅⣜⡽⢯⢞⡕⡠⠓⣡⢚⣷⣷⣿⣳⡄⠢⠉⠛⢿⣲⢿⣶⢿⣬⣾⣛⠳⣼⡮⠳⡂⠒⠀",
+"⠀⠀⠀⠀⠀⠀⠀⠀⢠⠏⡁⢉⣀⣑⣆⡐⠊⣅⡕⢦⣀⣱⡶⢫⣨⢟⠽⠕⣇⢶⣵⣋⢝⣉⣋⠜⠉⠉⡯⠛⣿⣿⣿⣾⣳⠠⠤⠪⠁⠊⠉⠻⣟⣾⣿⣿⣟⣧⣧⢸⠂⠠⢠",
+"⠀⠀⠀⠀⠀⠀⠀⣠⣾⢞⢉⠿⢿⣟⡓⠖⢾⡏⢠⣾⣿⠛⣰⠾⢓⡵⣺⢺⣼⡫⢪⡱⣉⠷⢗⡀⠤⠆⡻⣛⠿⣻⣿⢶⣊⡄⠀⠀⠀⠀⠄⢀⠀⠉⠿⣿⡿⣿⣛⡁⢍⣀⡌",
+"⠀⠀⠀⠀⠀⠀⣠⣛⢓⠗⠀⠀⠠⣈⠉⢀⢬⣵⡿⢋⣴⣞⣵⣼⣭⢁⠕⢿⢋⣞⢟⣕⡩⣔⠃⠀⠀⡀⣛⣤⢿⣷⢻⣿⣿⣽⣮⡙⠆⠀⠤⢓⡙⣆⠀⠀⠘⠙⢯⣛⣶⠋⠁",
+"⠀⠀⠀⠀⠀⢠⢋⢿⣼⣶⣶⣤⠒⢉⠠⣪⣮⠟⣡⡾⠹⡿⣿⣿⠝⢊⣐⢺⡜⣫⡞⢭⡕⠋⣐⠒⠀⠡⠏⠉⠘⠛⠚⡻⣯⠋⠛⢅⠐⢄⠀⣸⡃⠛⠀⡀⡀⠀⠈⠙⡟⠀⠀",
+"⠀⠀⠀⠀⣠⢫⠎⠙⠿⣿⠛⡡⠔⠕⣴⡿⡁⡮⡷⡶⢟⣿⢎⡵⡠⢞⠱⢈⣼⠁⠄⠇⡄⣢⠒⠀⡎⠀⡇⠒⠐⠐⠐⢚⠐⢷⣔⢖⢊⡈⠒⠗⠠⠘⠈⡁⢈⣠⣤⠾⠀⠀⠀",
+"⠀⠀⠀⣰⢳⠏⢀⢔⢤⠶⠪⣠⣭⣾⣿⠗⢘⣷⣼⠛⠛⢛⡝⣜⢑⣤⣾⠿⣿⣿⢽⣿⠿⠶⢴⣯⣄⡄⣇⣀⣀⡀⠄⠠⠆⣀⡨⢽⣵⣕⣄⣀⣰⣥⣶⣾⡿⠟⠉⠀⠀⠀⠀",
+"⠀⠀⡰⣱⢋⠴⣩⠔⠻⣴⡾⢷⣿⡿⠃⠰⢿⣿⣿⣿⣶⣬⣧⣼⡿⠛⠁⡢⠒⠈⢈⡉⠿⠚⢼⣿⣿⣿⡆⠋⠉⠢⠀⢀⣀⣡⣴⡶⣿⣿⣿⠿⠻⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀",
+"⠀⡼⣳⣯⣱⣪⣲⣫⠻⣯⢟⠽⠋⠀⠀⠀⠀⠈⠙⠻⢻⡳⡩⢇⢀⠸⢢⣤⣴⣁⡀⠊⡀⠠⠂⢉⣫⡭⣁⣀⣠⣴⣶⢿⣿⣿⣿⡿⠞⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+"⣼⣟⡿⣿⣿⢝⣫⣶⡿⠣⠉⠀⠀⠀⠀⠀⠀⠀⣠⣖⠕⡩⢂⢕⠡⠒⠸⣿⣿⣿⡿⢂⢀⠀⣜⡿⣵⣶⣾⣿⡿⠯⠟⠋⠉⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+"⢸⢿⣷⣷⣷⣿⠛⠋⠁⠀⠀⠀⠀⠀⠀⢀⣴⡺⠟⣑⣿⡺⢑⡴⠂⠊⠀⢀⡁⣍⣢⣼⣺⣽⣶⡿⠿⠏⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+"⠀⠈⠙⠻⠝⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⡿⡋⢰⠕⠋⡿⠉⢁⡈⢕⣲⣼⣒⣯⣷⣿⠿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⣷⣧⡎⣠⡤⠥⣰⢬⣵⣮⣽⣿⡿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣷⣮⣟⡯⣓⣦⣿⣮⣿⣿⣿⠿⠛⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠛⠿⣿⣿⣿⣿⡿⠟⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+];
+const asciiFull=asciiLines.join('\n');
+const asciiEl=document.getElementById('ascii-art');
+const splashName=document.getElementById('splash-name');
+let aIdx=0,aTimer;
+
+function typeAscii(){
+  if(aIdx<=asciiFull.length){
+    asciiEl.textContent=asciiFull.slice(0,aIdx);
+    aIdx++;
+    const ch=asciiFull[aIdx];
+    aTimer=setTimeout(typeAscii,(ch==='\n'||ch==='⠀')?1:6);
+  }else{
+    splashName.classList.add('show');
+  }
+}
+
+function hideSplash(){
+  clearTimeout(aTimer);
+  document.getElementById('splash').classList.add('hide');
+}
+
+setTimeout(typeAscii,400);
+const totalChars=asciiFull.length;
+setTimeout(hideSplash, 400+totalChars*6+2200);
+document.addEventListener('keydown',hideSplash,{once:true});
+// mobile tap to skip
+document.getElementById('splash').addEventListener('touchend',hideSplash,{once:true});
+
+/* ── CURSOR (desktop only) ── */
+const cur=document.getElementById('cursor');
+const trail=document.getElementById('cursor-trail');
+if(cur){
+  let tx=0,ty=0,cx=0,cy=0;
+  document.addEventListener('mousemove',e=>{
+    tx=e.clientX;ty=e.clientY;
+    cur.style.left=tx+'px';cur.style.top=ty+'px';
+  });
+  // trail lags slightly
+  function animTrail(){
+    cx+=(tx-cx)*0.2;cy+=(ty-cy)*0.2;
+    trail.style.left=cx+'px';trail.style.top=cy+'px';
+    requestAnimationFrame(animTrail);
+  }
+  animTrail();
+  document.addEventListener('mousedown',()=>cur.classList.add('clicking'));
+  document.addEventListener('mouseup',()=>cur.classList.remove('clicking'));
+  document.querySelectorAll('a,button,.proj-card,.research-card,.tl-header,.tag').forEach(el=>{
+    el.addEventListener('mouseenter',()=>cur.classList.add('hovering'));
+    el.addEventListener('mouseleave',()=>cur.classList.remove('hovering'));
+  });
+}
+
+/* ── LINK MODAL ── */
+const modal=document.getElementById('link-modal');
+function openMulti(title,sub,links){
+  document.getElementById('lm-title').textContent=title;
+  document.getElementById('lm-sub').textContent=sub;
+  document.getElementById('lm-ext').style.display='none';
+  document.getElementById('lm-items').innerHTML=links.map(l=>`<a class="lm-btn" href="${l.url}" target="_blank" onclick="setTimeout(closeModal,200)">${l.label}<small>${l.sub}</small></a>`).join('');
+  modal.classList.add('open');
+}
+function openSingle(url,name){
+  document.getElementById('lm-title').textContent='Opening external site';
+  document.getElementById('lm-sub').textContent=name;
+  document.getElementById('lm-ext').style.display='block';
+  const domain=url.replace(/https?:\/\//,'').split('/')[0];
+  document.getElementById('lm-items').innerHTML=`<a class="lm-btn" href="${url}" target="_blank" onclick="setTimeout(closeModal,200)">OPEN ${name.slice(0,18).toUpperCase()}<small>${domain}</small></a>`;
+  modal.classList.add('open');
+}
+function closeModal(){modal.classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
+
+/* ── KINETIC TEXT ── */
+function buildKinetic(id,sentence,accents=[]){
+  const el=document.getElementById(id);if(!el)return;
+  el.innerHTML=sentence.split(' ').map(w=>{
+    const isA=accents.includes(w.toLowerCase().replace(/[^a-z]/g,''));
+    return `<span class="word"><span class="word-inner${isA?' accent':''}">${w}</span></span>`;
+  }).join(' ');
+  const words=el.querySelectorAll('.word');
+  new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting)words.forEach((w,i)=>setTimeout(()=>w.classList.add('revealed'),i*65));
+  },{threshold:0.25}).observe(el);
+}
+buildKinetic('kinetic1','i build things. that actually work.',['build','actually','work']);
+buildKinetic('kinetic2','circuits. code. robots. repeat.',['circuits','code','robots','repeat']);
+
+/* ── APPLE SCROLL ZOOM ── */
+(function(){
+  if(window.innerWidth<=900) return;
+  const sec=document.getElementById('szoom1');
+  const el=document.getElementById('szoom-text1');
+  if(!sec||!el)return;
+  const sentence='i build things at the edge of hardware and software.';
+  const accents=['build','edge','hardware','software'];
+  const words=sentence.split(' ');
+  el.innerHTML=words.map((w,i)=>{
+    const isA=accents.includes(w.toLowerCase().replace(/[^a-z]/g,''));
+    return `<span class="szoom-word dim" data-i="${i}" data-a="${isA}">${w}</span>`;
+  }).join(' ');
+  const spans=el.querySelectorAll('.szoom-word');
+  let ticking=false;
+  function update(){
+    const r=sec.getBoundingClientRect(),vh=window.innerHeight;
+    const p=Math.max(0,Math.min(1,(-r.top)/(r.height-vh+1)));
+    const lit=Math.round(p*words.length);
+    spans.forEach((s,i)=>{
+      const isA=s.getAttribute('data-a')==='true';
+      s.className='szoom-word '+(i<lit?(isA?'accent-lit':'lit'):'dim');
+    });
+    el.style.transform=`scale(${(1+Math.sin(p*Math.PI)*0.06).toFixed(4)})`;
+    el.style.transformOrigin='left center';
+    ticking=false;
+  }
+  window.addEventListener('scroll',()=>{
+    if(!ticking){ticking=true;requestAnimationFrame(update);}
+  },{passive:true});
+  update();
+})();
+
+/* ── TYPEWRITER ── */
+const phrases=[
+  "currently: student @ UW–Madison · EE · 2029",
+  "const drone = new Arduino({ type: 'FPV_Quadcopter' });",
+  "while(curious) { build(); break_things(); learn(); }",
+  "skills.includes('robots') && skills.includes('apps') // true",
+  "git commit -m 'turning sparks into software'"
+];
+let pi=0,ci=0,del=false;
+const tw=document.getElementById('typewriter');
+function type(){
+  const p=phrases[pi];
+  if(!del){ci++;tw.innerHTML=p.slice(0,ci)+'<span class="cur"></span>';
+    if(ci===p.length){del=true;setTimeout(type,2400);return;}setTimeout(type,40);
+  }else{ci--;tw.innerHTML=p.slice(0,ci)+'<span class="cur"></span>';
+    if(ci===0){del=false;pi=(pi+1)%phrases.length;setTimeout(type,350);return;}setTimeout(type,16);}
+}
+setTimeout(type,2400);
+
+/* ── SCROLL REVEAL ── */
+const revObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){
+    e.target.classList.add('visible');
+    // count-up for stat numbers
+    e.target.querySelectorAll('.stat-num[data-target]').forEach(el=>{
+      const target=parseInt(el.getAttribute('data-target'));
+      let n=0;const step=()=>{n++;el.textContent=n+'+'+(target===n?'':' ');if(n<target)setTimeout(step,80);else el.textContent=target+'+';};
+      step();
+    });
+  }});
+},{threshold:0.08});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>revObs.observe(el));
+
+/* ── NAV ── */
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',scrollY>60),{passive:true});
+const navLinks=document.querySelectorAll('.nav-links a');
+document.querySelectorAll('section[id]').forEach(s=>{
+  new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting)navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+s.id));
+  },{threshold:0.35}).observe(s);
+});
+
+/* ── PROJECT CARD GLOW ── */
+document.querySelectorAll('.proj-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+    card.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+  });
+  // mobile tap
+  card.addEventListener('touchstart',()=>card.style.background='var(--surface2)',{passive:true});
+  card.addEventListener('touchend',()=>setTimeout(()=>card.style.background='',300));
+});
+
+/* ── SCROLL ZOOM ON CARDS ── */
+if(window.innerWidth > 900){
+const zObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.target.matches(':hover')){
+      const s=0.94+e.intersectionRatio*0.06;
+      e.target.style.transform=`scale(${s.toFixed(4)})`;
+    }
+  });
+},{threshold:Array.from({length:21},(_,i)=>i/20)});
+document.querySelectorAll('.proj-card,.research-card').forEach(c=>{
+  c.style.transition='transform .3s ease,background .25s,padding-left .2s';
+  zObs.observe(c);
+});
+}
+
+/* ── TERMINAL FULLSCREEN ── */
+const termWrap=document.getElementById('terminal-wrap');
+const termOverlay=document.getElementById('term-overlay');
+let termIsFullscreen=false;
+let pongRunning=false;
+
+let termOrigParent=null, termOrigNext=null;
+
+function termToggleFull(){
+  termIsFullscreen=!termIsFullscreen;
+  if(termIsFullscreen){
+    // move terminal to body so fixed positioning works
+    termOrigParent=termWrap.parentElement;
+    termOrigNext=termWrap.nextSibling;
+    document.body.appendChild(termWrap);
+    termWrap.classList.add('fullscreen');
+    termOverlay.classList.add('show');
+    document.getElementById('term-expand-btn').textContent='[F] exit';
+    termInput.focus();
+  } else {
+    // move back to original position
+    termWrap.classList.remove('fullscreen');
+    termOverlay.classList.remove('show');
+    document.getElementById('term-expand-btn').textContent='[F] fullscreen';
+    if(termOrigParent){
+      if(termOrigNext) termOrigParent.insertBefore(termWrap, termOrigNext);
+      else termOrigParent.appendChild(termWrap);
+    }
+  }
+}
+
+function termClose(){
+  if(termIsFullscreen) termToggleFull();
+}
+
+/* ── INTERACTIVE TERMINAL ── */
+const termBody=document.getElementById('term-body');
+const termInput=document.getElementById('term-input');
+let cmdHistory=[], histIdx=-1;
+
+const asciiName=
+`  ___  ____  ____
+ / _ \\| __ )/ ___|
+| | | |  _ \\ ___ \\
+| |_| | |_) |___) |
+ \\__\\_\\____/|____/  aaditya bharat singh`;
+
+const matrixChars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&';
+
+const facts=[
+  'i once built a spot welder from a microwave transformer.',
+  'my first robot was a LEGO NXT. it kind of worked.',
+  'been volunteering at jakkur lake since 2018.',
+  'i shred guitar when i am not writing code.',
+  'my drone started as a lego prototype. now it actually flies.',
+  'i published 2 research papers before turning 20.',
+  'i once debugged an esp32 for 6 hours. it was a loose wire.',
+  'i built an rfid door lock before getting a key to the lab.',
+  'jala poshan app incoming on app store + play store soon.',
+  'UW madison is cold. the engineering is not.',
+  'i once soldered 40 connections in one sitting. my hand survived.',
+  'favorite debugging tool: staring at the code until it admits the bug.',
+];
+let factIdx=0;
+
+const cmds={
+  help:()=>
+`COMMANDS
+────────────────────────────────────────
+  whoami      - quick summary
+  about       - longer bio
+  skills      - tech stack
+  projects    - featured work
+  experience  - work history
+  contact     - get in touch
+
+  neofetch    - system info
+  git log     - commit history
+  pong        - play pong (W/S to move, Q to quit)
+  clear       - clear terminal
+
+  or just ask me anything in plain english
+────────────────────────────────────────
+  tab: autocomplete   up/down: history`,
+
+  whoami:()=>
+`aaditya bharat singh
+────────────────────
+role     - EE student + developer + roboticist
+location - madison, WI — UW-Madison
+origin   - bengaluru, india
+status   - seeking internships — class of 2029`,
+
+  about:()=>
+`Aaditya Bharat Singh
+────────────────────────────────────────
+EE student at UW-Madison building things
+at the intersection of hardware and software.
+
+volunteering with jala poshan since 2018,
+embedded systems intern at ARTPARK @ IISc,
+interned at bangalore airport,
+building the jalaposhan volunteer app,
+electrical engineer at Wisconsin Racing (FSAE).
+
+building robots, apps, and interfaces
+that do something awesome.`,
+
+  skills:()=>
+`TECH STACK
+──────────
+hardware - arduino, esp32, raspberry pi, kicad,
+           ardupilot, pcb design, drones, ros
+
+software - python, c/c++, javascript, flutter,
+           react native, firebase, matlab, git
+
+tools    - vs code, linux, figma, latex`,
+
+  projects:()=>
+`PROJECTS
+────────
+01  Jalaposhan App
+    flutter, firebase — coming to app store soon
+
+02  Arduino FPV Drone
+    arduino, gps, ardupilot
+
+03  ESP32 RFID Access System
+    esp32, rfid, c++
+
+04  Arduino Spot Welder
+    recycled microwave transformer
+
+05  EV3 Self-Balancing Robot
+    lego ev3, pid control
+
+06  Sumo Bot V2
+    roboparade competition — front lifter + tracks`,
+
+  experience:()=>
+`EXPERIENCE
+──────────
+2025-now   Electrical Engineer — Wisconsin Racing (FSAE)
+           UW-Madison formula student team
+
+2024-now   Lead App Developer — Jala Poshan
+           cross-platform volunteer management app
+
+2024-2025  Embedded Systems Intern — ARTPARK @ IISc
+           AI robotics, comrado aerospace
+
+Jun 2024   Intern — BIAL (Bangalore Airport)
+           environmental systems analysis`,
+
+  contact:()=>
+`CONTACT
+───────
+email     - aadityabharatsingh81@gmail.com
+linkedin  - linkedin.com/in/aadityabharatsingh
+instagram - @aadityabsingh
+site      - aadityabharatsingh.com
+
+open to: internships, collabs, cool projects`,
+
+  neofetch:()=>
+`        ___         abs@portfolio
+       /   \\        ─────────────
+      |  W  |       OS: ABS-OS 2025 x86_64
+       \\___/        Host: UW-Madison
+      /|   |\\       Kernel: creativity-5.9
+     / |   | \\      Shell: zsh + vscode
+    /__| W |__\\     Languages: Python C++ JS Dart
+                    Hardware: Arduino ESP32 RPi
+   aaditya bharat   Hobbies: robots guitar sketching
+   singh · 2029`,
+
+  'rm -rf /':()=>`rm: nice try. website stays.`,
+
+  clear:()=>null,
+
+  pong:()=>{ startPong(); return null; },
+};
+
+cmds['git log']=()=>
+`commit a4f9d2c (HEAD -> main)
+    feat: add pong to terminal
+
+commit 3b82f6e
+    fix: drone crash — wrong motor direction
+
+commit 2dd4bf1
+    feat: jalaposhan app v1
+
+commit 0a1b2c3
+    init: first robot build (lego nxt)`;
+
+
+/* ── PONG GAME ── */
+function startPong(){
+  if(pongRunning) return;
+  pongRunning=true;
+
+  // Scroll to pong area
+  if(termIsFullscreen===false) termToggleFull();
+
+  // Build pong in term-body
+  const container=document.createElement('div');
+  container.style.cssText='padding:4px 0;';
+
+  const info=document.createElement('div');
+  info.className='term-output term-line';
+  info.textContent='W/S or Up/Down to move — Q to quit';
+  container.appendChild(info);
+
+  const canvas=document.createElement('canvas');
+  canvas.id='pong-canvas';
+  const W=460, H=240;
+  canvas.width=W; canvas.height=H;
+  canvas.style.cssText=`display:block;background:#000;border:1px solid rgba(45,212,191,0.3);border-radius:4px;margin:8px 0;max-width:100%;`;
+  container.appendChild(canvas);
+
+  const score=document.createElement('div');
+  score.className='term-output term-line';
+  score.id='pong-score';
+  score.textContent='Player  0  —  0  CPU';
+  container.appendChild(score);
+
+  termBody.appendChild(container);
+  termBody.scrollTop=termBody.scrollHeight;
+
+  const ctx=canvas.getContext('2d');
+  const PADDLE_H=56, PADDLE_W=8, BALL_R=6;
+  const TEAL='#2dd4bf';
+
+  let state={
+    ballX:W/2, ballY:H/2,
+    ballVX:3.5*(Math.random()>.5?1:-1), ballVY:3*(Math.random()>.5?1:-1),
+    pY:H/2-PADDLE_H/2, cpuY:H/2-PADDLE_H/2,
+    pScore:0, cpuScore:0,
+    keys:{},
+    running:true,
+  };
+
+  function drawRect(x,y,w,h,col){
+    ctx.fillStyle=col; ctx.fillRect(x,y,w,h);
+  }
+  function drawCircle(x,y,r,col){
+    ctx.fillStyle=col; ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fill();
+  }
+  function drawDash(){
+    ctx.fillStyle='rgba(45,212,191,0.15)';
+    for(let y=0;y<H;y+=20) ctx.fillRect(W/2-1,y,2,12);
+  }
+
+  function render(){
+    ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H);
+    drawDash();
+    drawRect(8, state.pY, PADDLE_W, PADDLE_H, TEAL);
+    drawRect(W-8-PADDLE_W, state.cpuY, PADDLE_W, PADDLE_H, 'rgba(45,212,191,0.5)');
+    drawCircle(state.ballX, state.ballY, BALL_R, TEAL);
+    ctx.fillStyle='rgba(45,212,191,0.5)';
+    ctx.font='11px "Space Mono",monospace';
+    ctx.textAlign='center';
+  }
+
+  function update(){
+    if(!state.running) return;
+
+    // player paddle
+    const spd=5;
+    if((state.keys['w']||state.keys['arrowup']) && state.pY>0) state.pY-=spd;
+    if((state.keys['s']||state.keys['arrowdown']) && state.pY<H-PADDLE_H) state.pY+=spd;
+
+    // cpu paddle (simple tracking with lag)
+    const cpuCenter=state.cpuY+PADDLE_H/2;
+    const diff=state.ballY-cpuCenter;
+    state.cpuY+=Math.sign(diff)*Math.min(Math.abs(diff)*0.06+1.8, 4.5);
+    state.cpuY=Math.max(0,Math.min(H-PADDLE_H,state.cpuY));
+
+    // move ball
+    state.ballX+=state.ballVX;
+    state.ballY+=state.ballVY;
+
+    // top/bottom bounce
+    if(state.ballY-BALL_R<=0){ state.ballY=BALL_R; state.ballVY=Math.abs(state.ballVY); }
+    if(state.ballY+BALL_R>=H){ state.ballY=H-BALL_R; state.ballVY=-Math.abs(state.ballVY); }
+
+    // player paddle collision
+    if(state.ballX-BALL_R<=8+PADDLE_W && state.ballVX<0 &&
+       state.ballY>=state.pY && state.ballY<=state.pY+PADDLE_H){
+      state.ballVX=Math.abs(state.ballVX)*1.04;
+      const rel=(state.ballY-(state.pY+PADDLE_H/2))/(PADDLE_H/2);
+      state.ballVY=rel*5;
+    }
+
+    // cpu paddle collision
+    if(state.ballX+BALL_R>=W-8-PADDLE_W && state.ballVX>0 &&
+       state.ballY>=state.cpuY && state.ballY<=state.cpuY+PADDLE_H){
+      state.ballVX=-Math.abs(state.ballVX)*1.02;
+      const rel=(state.ballY-(state.cpuY+PADDLE_H/2))/(PADDLE_H/2);
+      state.ballVY=rel*5;
+    }
+
+    // clamp ball speed
+    const maxSpd=9;
+    const spd2=Math.sqrt(state.ballVX**2+state.ballVY**2);
+    if(spd2>maxSpd){ state.ballVX=state.ballVX/spd2*maxSpd; state.ballVY=state.ballVY/spd2*maxSpd; }
+
+    // scoring
+    if(state.ballX<0){ state.cpuScore++; resetBall(-1); }
+    if(state.ballX>W){ state.pScore++;  resetBall(1);  }
+
+    score.textContent=`Player  ${state.pScore}  —  ${state.cpuScore}  CPU`;
+  }
+
+  function resetBall(dir){
+    state.ballX=W/2; state.ballY=H/2;
+    state.ballVX=3.5*dir; state.ballVY=3*(Math.random()>.5?1:-1);
+  }
+
+  // key listeners
+  function onKey(e,down){
+    const k=e.key.toLowerCase();
+    state.keys[k]=down;
+    if(['arrowup','arrowdown',' '].includes(k)) e.preventDefault();
+    if(k==='q'&&down){ stopPong(state); }
+  }
+  document.addEventListener('keydown',e=>onKey(e,true));
+  document.addEventListener('keyup',e=>onKey(e,false));
+
+  let raf;
+  function loop(){
+    if(!state.running){ cancelAnimationFrame(raf); return; }
+    update(); render();
+    raf=requestAnimationFrame(loop);
+  }
+  loop();
+
+  function stopPong(s){
+    s.running=false; pongRunning=false;
+    cancelAnimationFrame(raf);
+    document.removeEventListener('keydown',onKey);
+    document.removeEventListener('keyup',onKey);
+    canvas.style.display='none';
+    info.textContent='game over. final score: Player '+s.pScore+' — '+s.cpuScore+' CPU';
+    score.textContent='type \'pong\' to play again';
+  }
+}
+
+/* ── OUTPUT ── */
+function typeOutput(lines, container, delay=14){
+  let i=0;
+  function next(){
+    if(i>=lines.length) return;
+    const div=document.createElement('div');
+    div.className='term-line term-output';
+    div.textContent=lines[i];
+    container.appendChild(div);
+    container.scrollTop=container.scrollHeight;
+    i++;
+    setTimeout(next, delay);
+  }
+  next();
+}
+
+function addTermLine(cmd, output){
+  const inputLine=document.createElement('div');
+  inputLine.className='term-line';
+  inputLine.innerHTML=`<span class="term-prompt">abs@portfolio:~$ </span><span style="color:var(--text)">${cmd}</span>`;
+  termBody.appendChild(inputLine);
+  if(output!==null){
+    const lines=output.split('\n');
+    typeOutput(lines, termBody, lines.length>12?6:16);
+  }
+  termBody.scrollTop=termBody.scrollHeight;
+}
+
+termInput.addEventListener('keydown',e=>{
+  if(e.key==='ArrowUp'){
+    e.preventDefault();
+    if(histIdx<cmdHistory.length-1){histIdx++;termInput.value=cmdHistory[cmdHistory.length-1-histIdx];}
+    return;
+  }
+  if(e.key==='ArrowDown'){
+    e.preventDefault();
+    if(histIdx>0){histIdx--;termInput.value=cmdHistory[cmdHistory.length-1-histIdx];}
+    else{histIdx=-1;termInput.value='';}
+    return;
+  }
+  if(e.key==='Tab'){
+    e.preventDefault();
+    const val=termInput.value.trim().toLowerCase();
+    const allKeys=Object.keys(cmds).filter(k=>!k.includes(' '));
+    const match=allKeys.find(k=>k.startsWith(val)&&k!==val);
+    if(match) termInput.value=match;
+    return;
+  }
+  if(e.key==='f'&&e.target===termInput&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+    // don't intercept 'f' when typing — only handle it as shortcut when input is empty
+  }
+  if(e.key!=='Enter') return;
+  const val=termInput.value.trim();
+  if(!val) return;
+  cmdHistory.push(val); histIdx=-1;
+  termInput.value='';
+  const key=val.toLowerCase();
+  if(key==='clear'){termBody.innerHTML=''; return;}
+  const fn=cmds[key];
+  if(fn){
+    const out=fn();
+    if(out!==null) addTermLine(val,out);
+    else addTermLine(val,null);
+  } else {
+    // unknown command → ask the AI agent
+    askAI(val);
+  }
+});
+
+// F key fullscreen toggle (when not typing)
+document.addEventListener('keydown',e=>{
+  if(e.key==='f'&&document.activeElement!==termInput&&!e.ctrlKey&&!e.metaKey){
+    termToggleFull();
+  }
+  if(e.key==='Escape'&&termIsFullscreen&&!pongRunning){
+    termToggleFull();
+  }
+});
+
+/* ── AI AGENT ── */
+const ABS_CONTEXT=`You are an AI assistant embedded in the personal portfolio terminal of Aaditya Bharat Singh. Answer questions about him concisely, in the first person as if you are him, in a calm developer tone — no fluff. Keep answers short (under 6 lines). Use plain text only, no markdown. If asked something totally unrelated to Aaditya, briefly say you can only speak to his work and background.
+
+About Aaditya:
+- EE student at University of Wisconsin-Madison, B.S. Electrical Engineering, Class of 2029
+- From Bengaluru, India
+- Electrical Engineer on Wisconsin Racing FSAE formula student team (2025-present)
+- Lead App Developer at Jala Poshan (2024-present) — built volunteer management app for Jakkur Lake conservation using Flutter, React Native, Firebase
+- Embedded Systems Intern at ARTPARK @ IISc, Bengaluru (Aug 2024 - Jan 2025) — AI robotics, ROS, ArduPilot, worked with Comrado Aerospace
+- Intern at Bangalore International Airport (BIAL) (Jun-Jul 2024) — environmental systems analysis
+- Published 2 research papers on IJCSPUB (AI robotics, AMD vs Intel chips)
+- Robot builds: FPV drone (Arduino/ArduPilot), ESP32 RFID system, spot welder, EV3 self-balancing robot, Sumo Bot V2, and more
+- Skills: Arduino, ESP32, Raspberry Pi, Python, C/C++, Flutter, React Native, Firebase, ROS, TensorFlow, MATLAB, PCB design, KiCad, Linux
+- Volunteering with Jala Poshan Foundation at Jakkur Lake since 2018
+- Interests: robotics, guitar, sketching, drones
+- Email: aadityabharatsingh81@gmail.com
+- LinkedIn: linkedin.com/in/aadityabharatsingh
+- Site: aadityabharatsingh.com
+- Open to internships in embedded systems, software engineering, robotics`;
+
+async function askAI(question){
+  // show the input line
+  addTermLine(question, null);
+
+  // add a thinking indicator
+  const thinkEl=document.createElement('div');
+  thinkEl.className='term-line term-output';
+  thinkEl.textContent='...';
+  termBody.appendChild(thinkEl);
+  termBody.scrollTop=termBody.scrollHeight;
+  termInput.disabled=true;
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:300,
+        system: ABS_CONTEXT,
+        messages:[{role:'user',content:question}]
+      })
+    });
+    const data=await res.json();
+    const reply=data.content?.[0]?.text||'sorry, something went wrong.';
+    thinkEl.remove();
+    // type out the response line by line
+    const lines=reply.split('\n');
+    typeOutput(lines, termBody, 12);
+  }catch(err){
+    thinkEl.textContent='could not reach AI — check connection.';
+  }finally{
+    termInput.disabled=false;
+    termInput.focus();
+  }
+}
+
+// hover effects on expand btn
+const expBtn=document.getElementById('term-expand-btn');
+expBtn.addEventListener('mouseenter',()=>expBtn.style.color='var(--text)');
+expBtn.addEventListener('mouseleave',()=>expBtn.style.color='var(--muted2)');
+
+// mobile focus
+termBody.addEventListener('click',()=>termInput.focus());
+
+/* ── CONTACT FORM ── */
+async function submitContact(){
+  const name    = document.getElementById('cf-name').value.trim();
+  const email   = document.getElementById('cf-email').value.trim();
+  const message = document.getElementById('cf-message').value.trim();
+  const btn     = document.getElementById('cf-submit-btn');
+  const btnText = document.getElementById('cf-btn-text');
+  const status  = document.getElementById('cf-status');
+
+  if(!name){ showCFStatus('#f87171','name is required'); return; }
+  if(!email||!email.includes('@')){ showCFStatus('#f87171','valid email required'); return; }
+  if(!message){ showCFStatus('#f87171','message cannot be empty'); return; }
+
+  btn.disabled=true; btnText.textContent='SENDING...';
+
+  try{
+    await emailjs.send(
+      'service_6n14qat',
+      'template_3c5mts4',
+      {
+        from_name:  name,
+        from_email: email,
+        message:    message,
+        to_email:   'aadityabharatsingh81@gmail.com',
+      }
+    );
+    btnText.textContent='SENT';
+    showCFStatus('var(--accent)','message sent — i will get back to you soon');
+    document.getElementById('cf-name').value='';
+    document.getElementById('cf-email').value='';
+    document.getElementById('cf-message').value='';
+    setTimeout(()=>{ btn.disabled=false; btnText.textContent='SEND MESSAGE'; status.style.opacity='0'; },4000);
+  }catch(err){
+    console.error(err);
+    btn.disabled=false; btnText.textContent='SEND MESSAGE';
+    const sub=encodeURIComponent(`Portfolio message from ${name}`);
+    const body=encodeURIComponent(`From: ${name} (${email})\n\n${message}`);
+    window.location.href=`mailto:aadityabharatsingh81@gmail.com?subject=${sub}&body=${body}`;
+    showCFStatus('var(--accent)','opening your email client...');
+  }
+}
+function showCFStatus(color,msg){
+  const s=document.getElementById('cf-status');
+  s.textContent=msg; s.style.color=color; s.style.opacity='1';
+}
+
+/* ── RESUME MODAL ── */
+function openResume(){
+  document.getElementById('resume-modal').classList.add('open');
+  document.getElementById('rf-name').focus();
+}
+function closeResume(){
+  document.getElementById('resume-modal').classList.remove('open');
+  // reset form
+  ['rf-name','rf-email','rf-company','rf-message'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.value='';
+  });
+  document.getElementById('rf-reason').value='';
+  document.querySelectorAll('.resume-reason-btn').forEach(b=>b.classList.remove('selected'));
+  const status=document.getElementById('resume-status');
+  status.textContent='';status.className='resume-status';
+  const btn=document.getElementById('resume-submit-btn');
+  if(btn){btn.disabled=false;document.getElementById('resume-btn-text').textContent='SEND REQUEST';}
+}
+function handleResumeOverlayClick(e){
+  if(e.target===document.getElementById('resume-modal')) closeResume();
+}
+function selectReason(el){
+  document.querySelectorAll('.resume-reason-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('rf-reason').value=el.textContent;
+}
+
+async function submitResume(){
+  const name=document.getElementById('rf-name').value.trim();
+  const email=document.getElementById('rf-email').value.trim();
+  const company=document.getElementById('rf-company').value.trim();
+  const reason=document.getElementById('rf-reason').value;
+  const message=document.getElementById('rf-message').value.trim();
+  const status=document.getElementById('resume-status');
+  const btn=document.querySelector('.resume-submit-btn');
+  const btnText=document.getElementById('resume-btn-text');
+
+  if(!name){showStatus('err','name is required'); return;}
+  if(!email||!email.includes('@')){showStatus('err','valid email required'); return;}
+  if(!reason){showStatus('err','please select a reason'); return;}
+
+  btn.disabled=true;
+  btnText.textContent='SENDING...';
+  showStatus('','');
+
+  // EmailJS send
+  // ⚠️  SETUP REQUIRED — see instructions below
+  try{
+    await emailjs.send(
+      'service_6n14qat',      // EmailJS service ID
+      'template_nxa7yxd',
+      {
+        from_name: name,
+        from_email: email,
+        company: company||'—',
+        reason: reason,
+        message: message||'No additional context provided.',
+        to_email: 'aadityabharatsingh81@gmail.com',
+      }
+    );
+    btnText.textContent='SENT';
+    showStatus('ok','request sent — i will get back to you soon');
+    setTimeout(closeResume, 2800);
+  }catch(err){
+    console.error(err);
+    btn.disabled=false;
+    btnText.textContent='SEND REQUEST';
+    // Fallback: open mailto if EmailJS not configured
+    const subject=encodeURIComponent(`Resume Request — ${reason}`);
+    const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\nCompany: ${company||'—'}\nReason: ${reason}\n\n${message}`);
+    window.location.href=`mailto:aadityabharatsingh81@gmail.com?subject=${subject}&body=${body}`;
+    showStatus('ok','opening your email client...');
+  }
+}
+
+function showStatus(type, msg){
+  const s=document.getElementById('resume-status');
+  s.textContent=msg;
+  s.className='resume-status'+(type?' '+type:'')+(msg?' show':'');
+}
+
+// Escape to close resume modal
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&document.getElementById('resume-modal').classList.contains('open')){
+    closeResume();
+  }
+});
+</script>
+</body>
+</html>
