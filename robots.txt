@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://aadityabharatsingh.com/sitemap.xml

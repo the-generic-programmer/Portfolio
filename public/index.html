@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aaditya Bharat Singh — PCB World</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- LOADING SCREEN -->
+  <div id="loading">
+    <div id="loading-inner">
+      <div id="falcon-wrap">
+        <svg id="falcon-svg" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+          <!-- Millennium Falcon top-down silhouette -->
+          <!-- Main disc hull -->
+          <ellipse cx="110" cy="60" rx="72" ry="55" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+          <ellipse cx="110" cy="60" rx="72" ry="55" fill="none" stroke="url(#falcon-progress)" stroke-width="1.5" stroke-dasharray="450" stroke-dashoffset="450" id="falcon-ring"/>
+          <!-- Hull plate lines -->
+          <line x1="55" y1="35" x2="160" y2="35" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+          <line x1="55" y1="85" x2="160" y2="85" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+          <line x1="95" y1="10" x2="95" y2="110" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+          <!-- Cockpit pod (left protrusion) -->
+          <ellipse cx="42" cy="50" rx="18" ry="10" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <ellipse cx="42" cy="50" rx="18" ry="10" fill="none" stroke="url(#falcon-progress)" stroke-width="1.5" stroke-dasharray="90" stroke-dashoffset="90" id="cockpit-ring"/>
+          <!-- Cockpit window -->
+          <circle cx="36" cy="50" r="4" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+          <circle cx="36" cy="50" r="2" fill="rgba(255,255,255,0.05)"/>
+          <!-- Quad laser cannon (top) -->
+          <rect x="130" y="30" width="12" height="8" rx="1" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.8"/>
+          <!-- Sensor dish (right) -->
+          <circle cx="175" cy="60" r="8" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <circle cx="175" cy="60" r="4" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+          <line x1="175" y1="52" x2="175" y2="68" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+          <line x1="167" y1="60" x2="183" y2="60" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+          <!-- Engine pods (rear) -->
+          <ellipse cx="115" cy="14" rx="20" ry="7" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+          <ellipse cx="115" cy="106" rx="20" ry="7" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.8"/>
+          <!-- Engine glow dots -->
+          <circle cx="95" cy="14" r="3" fill="rgba(255,255,255,0.05)" id="eng1"/>
+          <circle cx="95" cy="106" r="3" fill="rgba(255,255,255,0.05)" id="eng2"/>
+          <!-- Hull detail circles -->
+          <circle cx="120" cy="55" r="12" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.8"/>
+          <circle cx="120" cy="55" r="6" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+          <circle cx="120" cy="55" r="2" fill="rgba(255,255,255,0.04)"/>
+          <!-- Cargo bays -->
+          <rect x="88" y="42" width="14" height="10" rx="1" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+          <rect x="88" y="68" width="14" height="10" rx="1" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+          <!-- Fill progress gradient -->
+          <defs>
+            <linearGradient id="falcon-progress" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0.5"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div id="falcon-glow"></div>
+      </div>
+
+      <div id="loading-text">
+        <div id="loading-name">AADITYA BHARAT SINGH</div>
+        <div id="loading-status">// CALIBRATING HYPERDRIVE</div>
+      </div>
+
+      <div id="loading-bar-wrap">
+        <div id="loading-bar">
+          <div id="loading-fill"></div>
+        </div>
+        <div id="loading-pct">0%</div>
+      </div>
+
+      <div id="loading-hint">PRESS ANY KEY TO SKIP</div>
+    </div>
+  </div>
+
+  <!-- SCANLINE OVERLAY -->
+  <div id="scanlines"></div>
+
+  <!-- MAIN CANVAS -->
+  <canvas id="c"></canvas>
+
+  <!-- HUD UI -->
+  <div id="ui">
+    <!-- Top left -->
+    <div id="hud-tl">
+      <div class="mono-tag">// ZONE</div>
+      <div id="hud-zone" class="hud-val">PCB SURFACE</div>
+    </div>
+
+    <!-- Top right: controls -->
+    <div id="hud-tr">
+      <div class="ctrl-line">WASD / ARROWS <span class="ctrl-key">DRIVE</span></div>
+      <div class="ctrl-line">SHIFT <span class="ctrl-key">BOOST</span></div>
+      <div class="ctrl-line">E / ENTER <span class="ctrl-key">INSPECT</span></div>
+      <div class="ctrl-line">DRAG <span class="ctrl-key">CAMERA</span></div>
+      <div class="ctrl-line">ESC <span class="ctrl-key">CLOSE</span></div>
+    </div>
+
+    <!-- Bottom left: speed -->
+    <div id="hud-bl">
+      <div id="hud-speed" class="mono-tag"></div>
+    </div>
+
+    <!-- Bottom right: name -->
+    <div id="hud-br">
+      <div class="mono-tag" style="color:rgba(255,255,255,0.2)">aadityabharatsingh.com</div>
+    </div>
+
+    <!-- Crosshair -->
+    <div id="xhair"></div>
+
+    <!-- Proximity prompt -->
+    <div id="prompt">
+      <span id="prompt-key">[ E ]</span>
+      <span id="prompt-label">INSPECT</span>
+    </div>
+
+    <!-- Info panel -->
+    <div id="panel">
+      <div id="panel-head">
+        <div id="panel-tag" class="mono-tag">// COMPONENT</div>
+        <button id="panel-close" onclick="window.closePanel()">✕</button>
+      </div>
+      <div id="panel-title">—</div>
+      <div id="panel-sub" class="mono-tag">—</div>
+      <div id="panel-divider"></div>
+      <div id="panel-desc">—</div>
+      <div id="panel-tags"></div>
+    </div>
+  </div>
+
+  <!-- Three.js from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+  <!-- Our modules -->
+  <script src="/js/data.js"></script>
+  <script src="/js/world.js"></script>
+  <script src="/js/robot.js"></script>
+  <script src="/js/controls.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/main.js"></script>
+
+</body>
+</html>
